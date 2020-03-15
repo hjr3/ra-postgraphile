@@ -55,6 +55,36 @@ export interface Response {
   data: any
 }
 
+export interface ScalarDefaults {
+  [type: string]: string
+}
+
+export interface FilterMappings {
+  [type: string]: {
+    [operator: string]: any
+  }
+}
+
+// Operator Specific Filters
+//
+// See https://github.com/graphile-contrib/postgraphile-plugin-connection-filter#operators
+
+export interface Contains {
+  contains: any
+}
+
+export interface EqualTo {
+  equalTo: any
+}
+
+export interface Like {
+  like: any
+}
+
+export interface LikeInsensitive {
+  likeInsensitive: any
+}
+
 // Constants
 
 export const CAMEL_REGEX = /(.+?)([A-Z])/gm
