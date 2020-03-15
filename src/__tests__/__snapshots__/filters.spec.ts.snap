@@ -41,4 +41,15 @@ Object {
 }
 `;
 
+exports[`filters should filter by objects 1`] = `
+Object {
+  "id": Object {
+    "contains": Array [
+      "a",
+      "b",
+    ],
+  },
+}
+`;
+
 exports[`filters should throw on unsupported types 1`] = `"Filter for type Unsupported not implemented."`;

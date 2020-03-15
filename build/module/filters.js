@@ -9,38 +9,41 @@ var __spreadArrays =
     return r
   }
 export var mapFilterType = function(type, value, key) {
-  var _a, _b, _c, _d
+  var _a, _b, _c, _d, _e
+  if (typeof value === 'object') {
+    return (_a = {}), (_a[key] = value), _a
+  }
   var normalizedName = type.name.toLowerCase()
   switch (normalizedName) {
     case 'string':
       return {
         or: [
-          ((_a = {}),
-          (_a[key] = {
-            equalTo: value
-          }),
-          _a),
           ((_b = {}),
           (_b[key] = {
+            equalTo: value
+          }),
+          _b),
+          ((_c = {}),
+          (_c[key] = {
             like: '%' + value + '%'
           }),
-          _b)
+          _c)
         ]
       }
     case 'uuid':
     case 'bigint':
     case 'int':
       return Array.isArray(value)
-        ? ((_c = {}),
-          (_c[key] = {
+        ? ((_d = {}),
+          (_d[key] = {
             in: value
           }),
-          _c)
-        : ((_d = {}),
-          (_d[key] = {
+          _d)
+        : ((_e = {}),
+          (_e[key] = {
             equalTo: value
           }),
-          _d)
+          _e)
     default:
       throw new Error('Filter for type ' + type.name + ' not implemented.')
   }

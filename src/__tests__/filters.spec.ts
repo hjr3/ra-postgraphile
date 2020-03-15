@@ -20,6 +20,11 @@ describe('filters', () => {
       )
     ).toMatchSnapshot()
   })
+  it.only('should filter by objects', () => {
+    expect(
+      mapFilterType({ name: 'String' }, { contains: ['a', 'b'] }, 'id')
+    ).toMatchSnapshot()
+  })
   it('should throw on unsupported types', () => {
     expect(() =>
       mapFilterType({ name: 'Unsupported' }, 'foo', 'br')

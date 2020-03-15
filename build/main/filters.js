@@ -1,6 +1,11 @@
 'use strict'
 Object.defineProperty(exports, '__esModule', { value: true })
 exports.mapFilterType = (type, value, key) => {
+  if (typeof value === 'object') {
+    return {
+      [key]: value
+    }
+  }
   const normalizedName = type.name.toLowerCase()
   switch (normalizedName) {
     case 'string':

@@ -4,6 +4,10 @@ export declare const mapFilterType: (
   key: string
 ) =>
   | {
+      [x: string]: any
+      or?: undefined
+    }
+  | {
       or: (
         | {
             [x: string]: {
@@ -16,18 +20,6 @@ export declare const mapFilterType: (
             }
           }
       )[]
-    }
-  | {
-      [x: string]: {
-        in: any[]
-      }
-      or?: undefined
-    }
-  | {
-      [x: string]: {
-        equalTo: any
-      }
-      or?: undefined
     }
 export declare const createFilter: (
   fields: any,

@@ -1,4 +1,10 @@
 export const mapFilterType = (type: any, value: any, key: string) => {
+  if (typeof value === 'object') {
+    return {
+      [key]: value
+    }
+  }
+
   const normalizedName = type.name.toLowerCase()
   switch (normalizedName) {
     case 'string':
