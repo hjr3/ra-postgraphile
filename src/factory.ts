@@ -5,7 +5,8 @@ import { ProviderOptions } from './types'
 
 export const factory = (
   client: any,
-  options: ProviderOptions = { queryValueToInputValueMap: {} }
+  options: ProviderOptions = { queryValueToInputValueMap: {} },
+  introspection?: any
 ) => {
   const defaultAppliedOptions = {
     queryValueToInputValueMap: {
@@ -17,6 +18,7 @@ export const factory = (
   return buildGraphQLProvider({
     client,
     buildQuery,
-    options: defaultAppliedOptions
+    options: defaultAppliedOptions,
+    introspection
   })
 }

@@ -16,7 +16,7 @@ var __assign =
 import buildGraphQLProvider from 'ra-data-graphql'
 import { buildQuery } from './buildQuery'
 import { defaultQueryValueToInputValueMap } from './defaultValueInputTypeMapping'
-export var factory = function(client, options) {
+export var factory = function(client, options, introspection) {
   if (options === void 0) {
     options = { queryValueToInputValueMap: {} }
   }
@@ -29,6 +29,7 @@ export var factory = function(client, options) {
   return buildGraphQLProvider({
     client: client,
     buildQuery: buildQuery,
-    options: defaultAppliedOptions
+    options: defaultAppliedOptions,
+    introspection: introspection
   })
 }
