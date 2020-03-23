@@ -13,10 +13,10 @@ const scalarDefaults = {
 }
 const filterMappings = {
   bigint: {
-    equalTo: BigInt
+    equalTo: typeof BigInt !== 'undefined' ? BigInt : value => value
   },
   bigintarray: {
-    in: value => value.map(BigInt)
+    in: value => (typeof BigInt !== 'undefined' ? value.map(BigInt) : value)
   },
   int: {
     equalTo: Number

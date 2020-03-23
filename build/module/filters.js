@@ -36,11 +36,16 @@ var scalarDefaults = {
 }
 var filterMappings = {
   bigint: {
-    equalTo: BigInt
+    equalTo:
+      typeof BigInt !== 'undefined'
+        ? BigInt
+        : function(value) {
+            return value
+          }
   },
   bigintarray: {
     in: function(value) {
-      return value.map(BigInt)
+      return typeof BigInt !== 'undefined' ? value.map(BigInt) : value
     }
   },
   int: {
