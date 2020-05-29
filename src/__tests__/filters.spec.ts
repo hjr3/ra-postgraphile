@@ -20,6 +20,9 @@ describe('filters', () => {
       )
     ).toMatchSnapshot()
   })
+  it('should filter with Full Text', () => {
+    expect(mapFilterType({ name: 'FullText' }, 'test', 'id')).toMatchSnapshot()
+  })
   it('should support custom filters via objects', () => {
     expect(
       mapFilterType({ name: 'StringList' }, { contains: ['a', 'b'] }, 'id')
