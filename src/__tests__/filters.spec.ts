@@ -1,9 +1,17 @@
 /* tslint:disable:no-expression-statement */
 import { mapFilterType } from '../filters'
+import { likeInsensitive } from '../operators'
 
 describe('filters', () => {
   it('should filter by String', () => {
     expect(mapFilterType({ name: 'String' }, 'value', 'id')).toMatchSnapshot()
+  })
+  it('should filter string using likeInsensitive', () => {
+    const parsedValue = likeInsensitive.parse('ilike value')
+
+    expect(
+      mapFilterType({ name: 'String' }, parsedValue, 'id')
+    ).toMatchSnapshot()
   })
   it('should filter by Int', () => {
     expect(mapFilterType({ name: 'Int' }, 5, 'id')).toMatchSnapshot()
