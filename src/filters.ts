@@ -9,7 +9,8 @@ const scalarDefaults: ScalarDefaults = {
   bigint: 'equalTo',
   bigintarray: 'in',
   int: 'equalTo',
-  intarray: 'in'
+  intarray: 'in',
+  fulltext: 'matches'
 }
 
 const filterMappings: FilterMappings = {
@@ -41,6 +42,9 @@ const filterMappings: FilterMappings = {
   },
   uuidarray: {
     in: (value: any) => value
+  },
+  fulltext: {
+    matches: (value: any) => `${value}:*`
   }
 }
 
