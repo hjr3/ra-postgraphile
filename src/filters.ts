@@ -4,7 +4,7 @@ import { likeInsensitive } from './operators'
 // If a filter is a scalar value, we find a default operator to map it to
 const scalarDefaults: ScalarDefaults = {
   // this breaks BC as the original default as equalTo or like
-  string: 'like',
+  string: 'includes',
   uuid: 'equalTo',
   uuidarray: 'in',
   bigint: 'equalTo',
@@ -33,8 +33,10 @@ const filterMappings: FilterMappings = {
   },
   string: {
     equalTo: String,
-    like: (value: any) => `%${value}%`,
-    likeInsensitive: (value: any) => `%${value}%`
+    includes: (value: any) => `${value}`,
+    includesInsensitive: (value: any) => `${value}`,
+    like: (value: any) => `${value}`,
+    likeInsensitive: (value: any) => `${value}`
   },
   stringlistarray: {
     contains: (value: any[]) => value.map(String)

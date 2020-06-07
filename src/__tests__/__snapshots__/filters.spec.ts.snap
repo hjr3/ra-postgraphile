@@ -19,7 +19,7 @@ Object {
 exports[`filters should filter by String 1`] = `
 Object {
   "id": Object {
-    "like": "%value%",
+    "includes": "value",
   },
 }
 `;
@@ -35,7 +35,7 @@ Object {
 exports[`filters should filter string using likeInsensitive 1`] = `
 Object {
   "id": Object {
-    "likeInsensitive": "%ilike value%",
+    "likeInsensitive": "ilike value",
   },
 }
 `;
