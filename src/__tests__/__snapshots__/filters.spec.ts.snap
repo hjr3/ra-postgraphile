@@ -40,6 +40,14 @@ Object {
 }
 `;
 
+exports[`filters should filter with Full Text 1`] = `
+Object {
+  "id": Object {
+    "matches": "test:*",
+  },
+}
+`;
+
 exports[`filters should support custom filters via objects 1`] = `
 Object {
   "id": Object {

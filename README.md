@@ -18,7 +18,7 @@ The `ra-postgraphile` data provider accepts 2 arguments:
 
 - `config` - _optional_ configuration
 
-    pgDataProvider(client, [config])
+  pgDataProvider(client, [config])
 
 The following examples shows the basic usage:
 
@@ -74,6 +74,12 @@ const PgSimplifyInflectorPlugin = require('@graphile-contrib/pg-simplify-inflect
 const PgConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
 ```
 
+For full-text search capabilities, the following plugin is also required:
+
+```js
+const PostGraphileFulltextFilterPlugin = require('postgraphile-plugin-fulltext-filter')
+```
+
 ## Configuration
 
 You can pass an _optional_ configuration object:
@@ -93,12 +99,11 @@ const pgDataProviderConfig = {
   The Map is also used to specify what complex types should be completely queried.
   By default only `scalar` and `scalar[]` fields are fetched.
 
-
 ## Contribution
 
 - Contribution is very welcome :).
 - Please create your commit messages based on [semantic-release syntax](https://github.com/semantic-release/semantic-release#how-does-it-work) and semantics (e.g. properly mark Breaking changes etc.).
-This let's us automatically create release notes and releases to NPM.
+  This let's us automatically create release notes and releases to NPM.
 
 ## Development
 
