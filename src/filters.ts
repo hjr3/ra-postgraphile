@@ -1,4 +1,5 @@
 import { ScalarDefaults, FilterMappings } from './types'
+import { likeInsensitive } from './operators'
 
 // If a filter is a scalar value, we find a default operator to map it to
 const scalarDefaults: ScalarDefaults = {
@@ -43,7 +44,26 @@ const filterMappings: FilterMappings = {
     in: (value: any) => value
   }
 }
-
+/**
+ * Transforms for a certain field type a search value for a field (the key)
+ * to a filter that is understood by postgraphile
+ * For example
+ * - type: {kind: "SCALAR", name: "String", ofType: null, __typename: "__Type"}
+ * - value: "some keyword"
+ * - key: "name"
+ * Is transformed to:
+ * {
+ *   "or": [{
+ *     "name": {
+ *       "equalTo": "some keyword"
+ *     }
+ *   }, {
+ *     "name": {
+ *       "like": "%some keyword%"
+ *     }
+ *   }]
+ * }
+ */
 export const mapFilterType = (type: any, value: any, key: string) => {
   let typeName = Array.isArray(value) ? `${type.name}Array` : type.name
 
