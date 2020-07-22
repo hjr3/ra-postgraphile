@@ -22,6 +22,9 @@ const filterMappings: FilterMappings = {
     in: (value: any[]) =>
       typeof BigInt !== 'undefined' ? value.map(BigInt) : value
   },
+  datetime: {
+    isNull: (value: any[]) => Boolean(value)
+  },
   int: {
     equalTo: Number
   },
@@ -39,7 +42,8 @@ const filterMappings: FilterMappings = {
     likeInsensitive: (value: any) => `${value}`
   },
   stringlistarray: {
-    contains: (value: any[]) => value.map(String)
+    contains: (value: any[]) => value.map(String),
+    equalTo: (value: any[]) => value.map(String)
   },
   uuid: {
     equalTo: (value: any) => value
