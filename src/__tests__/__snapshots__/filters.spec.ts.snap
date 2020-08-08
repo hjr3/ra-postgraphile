@@ -32,7 +32,7 @@ Object {
 }
 `;
 
-exports[`filters should filter string using likeInsensitive 1`] = `
+exports[`filters should filter using a FilterSpec 1`] = `
 Object {
   "id": Object {
     "likeInsensitive": "ilike value",
@@ -59,4 +59,8 @@ Object {
 }
 `;
 
-exports[`filters should throw on unsupported types 1`] = `"Filter for scalar foo of type Unsupported not implemented."`;
+exports[`filters should throw an error if custom filter is not of type FilterSpec 1`] = `"Alternative {} filter is not of type FilterSpec"`;
+
+exports[`filters should throw an error if custom filter is not of type FilterSpec 2`] = `"Alternative {\\"operator\\":\\"equalTo\\"} filter is not of type FilterSpec"`;
+
+exports[`filters should throw an error if custom filter is not of type FilterSpec 3`] = `"Alternative {\\"value\\":\\"foo\\"} filter is not of type FilterSpec"`;

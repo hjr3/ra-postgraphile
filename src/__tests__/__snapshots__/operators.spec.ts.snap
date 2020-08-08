@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`operators should parse and format for likeInsensitive operator 1`] = `
-Object {
-  "likeInsensitive": "ilike value",
-}
-`;
-
-exports[`operators should parse and format for likeInsensitive operator 2`] = `"ilike value"`;

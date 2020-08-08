@@ -1,44 +1,94 @@
-/* tslint:disable:no-expression-statement */
+import { FilterSpec } from '../types'
 import { mapFilterType } from '../filters'
-import { likeInsensitive } from '../operators'
 
 describe('filters', () => {
   it('should filter by String', () => {
-    expect(mapFilterType({ name: 'String' }, 'value', 'id')).toMatchSnapshot()
+    expect(
+      mapFilterType(
+        { kind: 'SCALAR', name: 'String', ofType: null },
+        'value',
+        'id'
+      )
+    ).toMatchSnapshot()
   })
-  it('should filter string using likeInsensitive', () => {
-    const parsedValue = likeInsensitive.parse('ilike value')
+  it('should filter using a FilterSpec', () => {
+    const spec: FilterSpec = {
+      operator: 'likeInsensitive',
+      value: 'ilike value'
+    }
 
     expect(
-      mapFilterType({ name: 'String' }, parsedValue, 'id')
+      mapFilterType(
+        { kind: 'SCALAR', name: 'String', ofType: null },
+        spec,
+        'id'
+      )
     ).toMatchSnapshot()
   })
   it('should filter by Int', () => {
-    expect(mapFilterType({ name: 'Int' }, 5, 'id')).toMatchSnapshot()
+    expect(
+      mapFilterType({ kind: 'SCALAR', name: 'Int', ofType: null }, 5, 'id')
+    ).toMatchSnapshot()
   })
   it('should filter by BigInt', () => {
-    expect(mapFilterType({ name: 'BigInt' }, 5, 'id')).toMatchSnapshot()
+    expect(
+      mapFilterType(
+        { kind: 'SCALAR', name: 'Int', ofType: null },
+        BigInt(5),
+        'id'
+      )
+    ).toMatchSnapshot()
   })
   it('should filter by UUID', () => {
     expect(
       mapFilterType(
-        { name: 'UUID' },
+        { kind: 'SCALAR', name: 'UUID', ofType: null },
         '02d07429-c2a7-4494-aec9-e8bde9176e86',
         'id'
       )
     ).toMatchSnapshot()
   })
   it('should filter with Full Text', () => {
-    expect(mapFilterType({ name: 'FullText' }, 'test', 'id')).toMatchSnapshot()
-  })
-  it('should support custom filters via objects', () => {
     expect(
-      mapFilterType({ name: 'StringList' }, { contains: ['a', 'b'] }, 'id')
+      mapFilterType(
+        { kind: 'SCALAR', name: 'FullText', ofType: null },
+        'test',
+        'id'
+      )
     ).toMatchSnapshot()
   })
-  it('should throw on unsupported types', () => {
+  it('should support custom filters via objects', () => {
+    const spec: FilterSpec = {
+      operator: 'contains',
+      value: ['a', 'b']
+    }
+    expect(
+      mapFilterType(
+        { kind: 'SCALAR', name: 'String', ofType: null },
+        spec,
+        'id'
+      )
+    ).toMatchSnapshot()
+  })
+  it('should throw an error if custom filter is not of type FilterSpec', () => {
     expect(() =>
-      mapFilterType({ name: 'Unsupported' }, 'foo', 'br')
+      mapFilterType({ kind: 'SCALAR', name: 'String', ofType: null }, {}, 'id')
+    ).toThrowErrorMatchingSnapshot()
+
+    expect(() =>
+      mapFilterType(
+        { kind: 'SCALAR', name: 'String', ofType: null },
+        { operator: 'equalTo', value: undefined },
+        'id'
+      )
+    ).toThrowErrorMatchingSnapshot()
+
+    expect(() =>
+      mapFilterType(
+        { kind: 'SCALAR', name: 'String', ofType: null },
+        { operator: undefined, value: 'foo' },
+        'id'
+      )
     ).toThrowErrorMatchingSnapshot()
   })
 })

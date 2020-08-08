@@ -55,34 +55,73 @@ export interface Response {
   data: any
 }
 
-export interface ScalarDefaults {
-  [type: string]: string
+// Copied from https://github.com/graphile-contrib/postgraphile-plugin-connection-filter/blob/master/src/PgConnectionArgFilterOperatorsPlugin.js#L42-L277
+export type Operator =
+  // Standard Operators
+  | 'isNull'
+  | 'equalTo'
+  | 'notEqualTo'
+  | 'distinctFrom'
+  | 'notDistinctFrom'
+  | 'in'
+  | 'notIn'
+
+  // Pattern Matching Operators
+  | 'includes'
+  | 'notIncludes'
+  | 'includesInsensitive'
+  | 'notIncludesInsensitive'
+  | 'startsWith'
+  | 'notStartsWith'
+  | 'startsWithInsensitive'
+  | 'notStartsWithInsensitive'
+  | 'endsWith'
+  | 'notEndsWith'
+  | 'endsWithInsensitive'
+  | 'notEndsWithInsensitive'
+  | 'like'
+  | 'notLike'
+  | 'likeInsensitive'
+  | 'notLikeInsensitive'
+
+  // HStore / JSON / INET Operators
+  | 'contains'
+  | 'containsKey'
+  | 'containsAllKeys'
+  | 'containsAnyKeys'
+  | 'containedBy'
+  | 'containedByOrEqualTo'
+  | 'containsOrContainedBy'
+
+  // operators not mentioned in postgraphile-plugin-connection-filter
+  | 'matches'
+
+export interface FilterSpec {
+  operator: Operator
+  value: any
 }
 
-export interface FilterMappings {
-  [type: string]: {
+export interface Filter {
+  [key: string]: {
     [operator: string]: any
   }
 }
 
-// Operator Specific Filters
-//
-// See https://github.com/graphile-contrib/postgraphile-plugin-connection-filter#operators
-
-export interface Contains {
-  contains: any
+export interface FilterMap {
+  and: Filter[]
 }
 
-export interface EqualTo {
-  equalTo: any
+export interface FieldType {
+  kind: string
+  name: string | null
+  ofType: FieldType | null
 }
 
-export interface Like {
-  like: any
-}
-
-export interface LikeInsensitive {
-  likeInsensitive: any
+export interface IntrospectionResource {
+  fields: {
+    name: string
+    type: FieldType
+  }[]
 }
 
 // Constants

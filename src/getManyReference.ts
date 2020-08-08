@@ -1,3 +1,4 @@
+import { IntrospectionResource } from './types'
 import { createFilter } from './filters'
 import {
   ManyReferenceParams,
@@ -9,7 +10,7 @@ import { createGetListQuery, createSortingKey } from './utils'
 
 export const getManyReference = (
   params: ManyReferenceParams,
-  type: object,
+  type: IntrospectionResource,
   manyLowerResourceName: string,
   resourceTypename: string,
   typeMap: object,
